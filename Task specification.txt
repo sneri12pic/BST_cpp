@@ -1,0 +1,74 @@
+			Part A: The binary search tree library
+			
+	Task is to complete the implementation of the methods and operators in the BST.cpp
+file, as specified in Table 1, so that the BST class passes all of the
+tests in the BSTtest.cpp file. You must not modify the BSTtest.cpp file
+or the supplied header file. However, you are free to add helper functions to
+the BST.cpp code file – an example is shown with the provided to string()
+method. In particular, you can add helper functions that take in a Node*
+parameter to allow recursive calls.
+	The BST class should be built as a library file, allowing it to be reused in
+other applications.
+ ----------------------------------------------------------------------------
+|	     Method		  |		  Description  		     |
+|---------------------------------|------------------------------------------|
+|1.void insert constant(string    | Inserts the constant (name) and its      |
+|name, string value)		  | corresponding value (value) into the     |
+|				  | correct position in the tree, e.g.	     |
+|				  | insert constant("PI", "3.142").	     |
+|---------------------------------|------------------------------------------|
+|2.string get value(string name)  |  Returns the value that corresponds	     |
+|				  |  to name, e.g. if PI 3.142 has	     |
+|				  |  been inserted into the tree, then	     |
+|				  |  get value(PI) would return the	     |
+|				  |  string 3.142. If name does not exist    |
+|				  |  in the tree then it should return the   |
+|	                          |  empty string, "".			     |  
+|				  |				  	     |
+|---------------------------------|------------------------------------------|
+|3.int num constants() 		  |  Returns the number of constant-value    |
+|				  |  pairs that have been inserted into the  |
+|				  |  tree.	   			     |
+|---------------------------------|------------------------------------------|
+|4.~BST() 			  |  Destructor for the BST class. This	     |
+|				  |  should free all heap-allocated memory   |
+|				  |  (Nodes) used by the class.		     |
+|---------------------------------|------------------------------------------|
+|5. BST(const BST &rhs)		  |  Creates a binary search tree by copying |
+|				  |  all of the constant-value pairs from    |
+|				  |  an existing binary search tree. This    |
+|				  |  must be a deep copy, not a reference.   |
+|---------------------------------|------------------------------------------|
+|6.BST& operator=(const BST &rhs) |  Assignment operator, e.g. tree1 =	     |
+|				  |  tree2. Deletes the nodes in tree1,	     |
+|				  |  freeing memory, and then makes deep     |
+|				  |  copies of all of the nodes in tree2.    |
+ ----------------------------------------------------------------------------
+
+			Part B: Using your BST class to handle #define preprocessor instructions
+			
+	In this part, you will use the insert constant(string name, string value)
+and get value(string name) methods from your BST class to replace constant names
+with their corresponding values in a file of .c source code. You
+should produce a command line application, called replace, that takes in a
+.c file as input. The name of the input file should be specified as a command
+line argument.
+	Your replace application is required to produce an output file that has
+the same name as the .c input file but with a .o file extension. This output
+file should contain the same lines of program code as in the input
+file, but modified as follows.
+	Every line that begins with #define constant name value should be processed
+as follows. First, the line should not appear in the output file. Second, constant
+name and value should be inserted into your BST object from Part A, by calling
+its insert constant(string name, string value) method. Finally, throughout the rest
+of the input file, any token that matches constant name should be replaced with value
+in the output file. To implement this, you should call the get value(string name)
+method of your BST object, with the current token as name. This will search the tree
+to determine whether the current token matches the name of any constant.
+If it does, the get value method will return the value that the token should be replaced
+with in the output file.
+	When formatting the output file, the line structure of the input file should
+be preserved, i.e. where code starts on a new line in the input file, it should
+also start on a new line in the output file. However, within a line you may
+separate each token by a single space, and you do not need to preserve the
+indentation structure of the input file
